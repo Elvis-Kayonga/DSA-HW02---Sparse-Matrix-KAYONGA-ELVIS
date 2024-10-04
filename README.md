@@ -1,100 +1,133 @@
-# SparseMatrix - README
 
-## Introduction
+# SparseMatrix Class
 
-This repository contains a Python class `SparseMatrix` for performing operations on sparse matrices. Sparse matrices are matrices in which most of the elements are zero. This class allows you to load matrices from files, perform operations such as addition, subtraction, and multiplication, and save the resulting matrix to a file.
+## Overview
+
+The `SparseMatrix` class provides a Python implementation to handle operations on sparse matrices, which contain mostly zero values. This implementation optimizes memory usage by storing only the non-zero values and allows common matrix operations such as addition, subtraction, and multiplication.
 
 ## Features
 
-- **Load matrix**: Load a sparse matrix from a file.
-- **Matrix operations**: Perform matrix addition, subtraction, and multiplication.
-- **Save matrix**: Save the resulting sparse matrix to a file.
-- **Efficient memory usage**: Only non-zero values are stored, saving memory in large sparse matrices.
+- **Matrix Loading**: Load sparse matrices from files containing the matrix dimensions and non-zero values.
+- **Matrix Operations**: Supports addition, subtraction, and multiplication of two sparse matrices.
+- **Matrix Manipulation**: Set and get elements of the sparse matrix efficiently.
+- **File Output**: Save the resulting sparse matrix back to a file after performing operations.
 
-## File Format
+## Getting Started
 
-Input matrix files should follow this format:
-- The first line contains the number of rows (e.g., `rows=3`).
-- The second line contains the number of columns (e.g., `cols=3`).
-- The following lines contain non-zero elements in the format `(row, col, value)`.
+### Prerequisites
 
-### Example:
+- Python 3.x
+
+### Installation
+
+Simply download or clone the repository containing the `SparseMatrix` class. No additional libraries are required for basic functionality.
+
+### Usage
+
+You can create instances of `SparseMatrix` either by loading data from a file or by initializing an empty matrix with given dimensions.
+
+#### 1. Loading a matrix from a file
+
+```python
+matrix = SparseMatrix(file_path='matrix_file.txt')
+```
+
+The file should contain:
+- The number of rows and columns in the matrix.
+- Non-zero elements in the format `(row, column, value)`.
+
+Example file content:
 ```
 rows=3
 cols=3
-(0, 1, 5)
-(1, 2, 8)
+(0, 0, 5)
+(1, 2, 9)
 ```
 
-## Class Methods
+#### 2. Performing Matrix Operations
 
-- **`load_matrix(file_path)`**: Loads a sparse matrix from a file.
-- **`get_element(row, col)`**: Returns the element at the specified row and column, or 0 if the element is not present.
-- **`set_element(row, col, value)`**: Sets a value at a specific position in the matrix.
-- **`add(other_matrix)`**: Adds two matrices and returns the result.
-- **`subtract(other_matrix)`**: Subtracts one matrix from another and returns the result.
-- **`multiply(other_matrix)`**: Multiplies two matrices and returns the result.
-- **`save_to_file(file_path)`**: Saves the current matrix to a file in the required format.
+You can add, subtract, or multiply two matrices. Here's how:
 
-## Usage
+```python
+matrix1 = SparseMatrix(file_path='matrix1.txt')
+matrix2 = SparseMatrix(file_path='matrix2.txt')
 
-1. **Load Matrices**:  
-   Matrices are loaded from files using the `SparseMatrix` constructor. The file should follow the defined input format.
+# Add matrices
+result = matrix1.add(matrix2)
 
-   ```python
-   matrix1 = SparseMatrix(matrix_file='matrix1.txt')
-   matrix2 = SparseMatrix(matrix_file='matrix2.txt')
-   ```
+# Subtract matrices
+result = matrix1.subtract(matrix2)
 
-2. **Perform Operations**:  
-   You can perform addition, subtraction, or multiplication between two matrices.
+# Multiply matrices
+result = matrix1.multiply(matrix2)
+```
 
-   ```python
-   result_add = matrix1.add(matrix2)
-   result_subtract = matrix1.subtract(matrix2)
-   result_multiply = matrix1.multiply(matrix2)
-   ```
+#### 3. Saving a Matrix to a File
 
-3. **Save Result**:  
-   After performing an operation, save the result to a file.
+You can save the resulting matrix back to a file:
 
-   ```python
-   result_add.save_to_file('result.txt')
-   ```
+```python
+result.save('result_matrix.txt')
+```
 
-## Running the Script
+### Command-line Interaction
 
-To execute the script, run the following command:
+A basic command-line interface is provided to let users select matrix operations interactively.
 
-```bash
+#### Steps:
+1. Load two matrices from files.
+2. Choose an operation: Add, Subtract, or Multiply.
+3. Save the result to a file.
+
+Example:
+```
 python sparse_matrix.py
-```
-
-You will be prompted to load two matrices from files, choose an operation (addition, subtraction, multiplication), and then save the result to an output file.
-
-### Example Execution:
-
-```
-Choose a matrix operation:
+Choose an operation:
 1. Add Matrices
 2. Subtract Matrices
 3. Multiply Matrices
-Enter your choice (1/2/3): 1
-Enter the output file path to save the result: result.txt
-Result saved to result.txt.
+Enter 1, 2, or 3: 1
+Matrices added.
+Enter file name to save the result: result.txt
+Result saved to result.txt
 ```
 
-## Error Handling
+### Matrix File Format
 
-- If matrices are incompatible for the chosen operation (e.g., multiplication requires matching dimensions), a `ValueError` will be raised with a helpful message.
-- If the input file format is incorrect, a `ValueError` is raised, informing the user of the format issue.
+The input file should adhere to the following format:
 
-## License
+```
+rows=<number_of_rows>
+cols=<number_of_columns>
+(row, column, value)
+(row, column, value)
+...
+```
 
-This project is licensed under the MIT License.
+For example:
+```
+rows=3
+cols=3
+(0, 0, 5)
+(1, 2, 9)
+```
 
-## Author
+### Example
 
-This project was developed as part of a Python learning exercise on sparse matrix operations.
+Suppose you have two sparse matrices in `matrix1.txt` and `matrix2.txt`. You can load them, perform an operation, and save the result like this:
 
-By: KAYONGA ELVIS - e.kayonga@alustudent.com
+```python
+matrix1 = SparseMatrix(file_path='matrix1.txt')
+matrix2 = SparseMatrix(file_path='matrix2.txt')
+
+result = matrix1.add(matrix2)
+result.save('added_matrix.txt')
+```
+
+### Exception Handling
+
+- If matrix dimensions do not match for addition or subtraction, the program raises a `ValueError`.
+- If you try to multiply matrices with incompatible sizes, a `ValueError` is raised.
+- If there is a format error in the matrix input file, an appropriate exception is raised with a descriptive error message.
+
+## By: KAYONGA ELVIS - e.kayonga@alustudent.com
