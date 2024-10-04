@@ -96,3 +96,5 @@ This project is licensed under the MIT License.
 ## Author
 
 This project was developed as part of a Python learning exercise on sparse matrix operations.
+
+By: KAYONGA ELVIS - e.kayonga@alustudent.com
